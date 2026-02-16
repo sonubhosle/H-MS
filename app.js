@@ -17,6 +17,12 @@ app.use("/api/hms", AppointmentRoutes);
 const AdminRoutes = require('./Routes/AdminRoutes');
 app.use('/api/hms/admin', AdminRoutes);
 
+const ReviewRoutes = require('./Routes/ReviewRoutes');
+app.use('/api/hms', ReviewRoutes);
+
+const RatingRoutes = require('./Routes/RatingRoutes');
+app.use('/api/hms', RatingRoutes);
+
 const PaymentRoutes = require('./Routes/PaymentRoutes');
 app.use('/api/hms', PaymentRoutes);
 

@@ -15,7 +15,7 @@ router.post("/auth/reset-password", UserController.resetPassword);
 
 
 
-// Authenticated user
+router.get("/users", Authenticate, UserController.getAllUsers);
 router.get("/users/profile", Authenticate, UserController.getUserProfile);
 
 router.put(

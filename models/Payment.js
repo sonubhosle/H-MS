@@ -4,7 +4,7 @@ const paymentSchema = new mongoose.Schema(
   {
     appointment: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Appointment",
+      ref: "appointments",
       required: true,
     },
 
@@ -34,5 +34,5 @@ const paymentSchema = new mongoose.Schema(
   }
 );
 
-const Payment = mongoose.model("Payment", paymentSchema);
+const Payment = mongoose.model("payments", paymentSchema);
 module.exports = Payment;

@@ -63,7 +63,22 @@ const login = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await UserService.getAllUsers();
+    return res.status(200).json({
+      success: true,
+      data: users,
+    });
+  }
+    catch (error) {
 
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
 
 
 const forgotPassword = async (req, res) => {
@@ -199,4 +214,5 @@ module.exports = {
   resetPassword,
   getUserProfile,
   updateProfile,
+  getAllUsers,
 };

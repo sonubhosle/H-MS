@@ -4,14 +4,14 @@ const appointmentSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "users",
       required: true,
       index: true,
     },
 
     doctor: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Doctor",
+      ref: "doctors",
       required: true,
       index: true,
     },
@@ -72,5 +72,5 @@ const appointmentSchema = new mongoose.Schema(
   }
 );
 
-const Appointment = mongoose.model("Appointment", appointmentSchema);
+const Appointment = mongoose.model("appointments", appointmentSchema);
 module.exports = Appointment;

@@ -40,14 +40,21 @@ const userSchema = new mongoose.Schema(
   type: Boolean,
   default: false
 },
+    ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: "ratings" }],
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "reviews" }],
 
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+        createdAt:{
+        type:Date,
+        default:Date.now()
+    },
+
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("users", userSchema);
 module.exports = User;

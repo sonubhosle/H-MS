@@ -4,7 +4,7 @@ const doctorSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "users",
       required: true,
       unique: true,
     },
@@ -49,6 +49,30 @@ const doctorSchema = new mongoose.Schema(
         endTime: String,
       },
     ],
+    ratings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ratings",  
+    }
+  ],
+
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "reviews",   
+    }
+  ],
+
+  numRatings: {
+    type: Number,
+    default: 0,
+  },
+
+  numReviews: {
+    type: Number,
+    default: 0,
+  },
+
 
     isActive: {
       type: Boolean,
@@ -66,5 +90,5 @@ const doctorSchema = new mongoose.Schema(
   }
 );
 
-const Doctor = mongoose.model("Doctor", doctorSchema);
+const Doctor = mongoose.model("doctors", doctorSchema);
 module.exports = Doctor;

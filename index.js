@@ -5,6 +5,9 @@ dotenv.config({
     quiet: true
 });
 
+require("./models");
+
+
 const app = require('./app');
 const databaseConnect = require('./config/db');
 

@@ -3,9 +3,7 @@ const bcrypt = require("bcrypt");
 const JWT_PROVIDER = require("../config/JWT");
 const crypto = require("crypto");
 
-// ======================================================
-// 🔐 CREATE USER
-// ======================================================
+
 const createUser = async (userData) => {
   const { name, surname, email, password, photo, mobile, role } = userData;
 
@@ -72,9 +70,6 @@ const createUser = async (userData) => {
   return userObject;
 };
 
-// ======================================================
-// 🔐 LOGIN USER
-// ======================================================
 const loginUser = async (email, password) => {
   const user = await User.findOne({
     email: email.toLowerCase().trim(),
@@ -105,9 +100,7 @@ const loginUser = async (email, password) => {
   };
 };
 
-// ======================================================
-// 🔍 FIND USER
-// ======================================================
+
 const findUserByEmail = async (email) => {
   if (!email) throw new Error("Email is required");
   return await User.findOne({ email: email.toLowerCase().trim() });
@@ -116,7 +109,7 @@ const findUserByEmail = async (email) => {
 const findUserById = async (userId) => {
   if (!userId) throw new Error("User ID is required");
 
-  const user = await User.findById(userId).select("-password");
+  const user = await User.findById(userId).select("-password").populate('ratings').populate('reviews');
   if (!user) throw new Error("User not found");
 
   return user;
@@ -135,9 +128,7 @@ const getUserProfile = async (token) => {
   return user;
 };
 
-// ======================================================
-// ✏ UPDATE PROFILE
-// ======================================================
+
 const updateUserProfile = async (userId, updateData) => {
   const allowedFields = ["name", "surname", "mobile", "photo", "email"];
   const updates = {};
@@ -163,9 +154,11 @@ const updateUserProfile = async (userId, updateData) => {
   return updatedUser;
 };
 
-// ======================================================
-// 🔑 PASSWORD RESET
-// ======================================================
+
+const getAllUsers = async () => {
+  return await User.find().select("-password").populate('ratings').populate('reviews');
+}
+
 const generateResetToken = () =>
   crypto.randomBytes(32).toString("hex");
 
@@ -225,4 +218,5 @@ module.exports = {
   updateUserProfile,
   setResetPasswordToken,
   resetPassword,
+  getAllUsers,
 };

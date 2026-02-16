@@ -30,7 +30,7 @@ const createDoctorProfile = async (userId, doctorData) => {
 // Get All Doctors
 const getAllDoctors = async () => {
   return await Doctor.find()
-    .populate("user", "-password");
+    .populate("user", "-password").populate('ratings').populate('reviews');
 };
 
 // Get Doctor By User Id
